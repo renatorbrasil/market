@@ -1,4 +1,4 @@
-package com.eventsourcing.market.domain.model;
+package com.eventsourcing.market.domain.model.user;
 
 import com.eventsourcing.market.domain.exception.InvalidAddressInfoException;
 import org.springframework.util.StringUtils;

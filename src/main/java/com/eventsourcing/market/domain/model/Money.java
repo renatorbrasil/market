@@ -8,7 +8,6 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-@NoArgsConstructor
 public class Money {
     @Getter
     private BigDecimal value;
@@ -22,6 +21,10 @@ public class Money {
 
     public Money(Double value) {
         this(new BigDecimal(value));
+    }
+
+    public Money() {
+        this(BigDecimal.ZERO);
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.eventsourcing.market.domain.repository;
 
-import com.eventsourcing.market.domain.model.Order;
-import com.eventsourcing.market.domain.model.Product;
+import com.eventsourcing.market.domain.model.order.Order;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;

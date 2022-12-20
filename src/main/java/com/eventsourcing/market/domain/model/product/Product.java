@@ -1,14 +1,15 @@
-package com.eventsourcing.market.domain.model;
+package com.eventsourcing.market.domain.model.product;
 
-import com.eventsourcing.market.domain.base.DomainEvent;
-import com.eventsourcing.market.domain.base.EventSourcedAggregate;
+import com.eventsourcing.market.domain.events.DomainEvent;
 import com.eventsourcing.market.domain.exception.EventNotSupportedException;
 import com.eventsourcing.market.domain.exception.NotEnoughProductsExeption;
-import com.eventsourcing.market.domain.model.events.ProductConsumedEvent;
-import com.eventsourcing.market.domain.model.events.ProductCreatedEvent;
-import com.eventsourcing.market.domain.model.snapshots.ProductSnapshot;
-import lombok.Getter;
+import com.eventsourcing.market.domain.events.ProductConsumedEvent;
+import com.eventsourcing.market.domain.events.ProductCreatedEvent;
+import com.eventsourcing.market.domain.model.EventSourcedAggregate;
+import com.eventsourcing.market.domain.model.Money;
+import com.eventsourcing.market.domain.snapshots.ProductSnapshot;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 public class Product extends EventSourcedAggregate {
@@ -35,6 +36,10 @@ public class Product extends EventSourcedAggregate {
         } else {
             throw new EventNotSupportedException();
         }
+    }
+
+    public Money getPriceWithAmount(Long amount) {
+        return price.multiplyBy(BigDecimal.valueOf(amount));
     }
 
     public void consume(Long quantity) {
@@ -68,6 +73,6 @@ public class Product extends EventSourcedAggregate {
     }
 
     public ProductSnapshot getSnapshot() {
-        return new ProductSnapshot(id, name);
+        return new ProductSnapshot(id, name, availableAmount, price);
     }
 }

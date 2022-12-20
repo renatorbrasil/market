@@ -1,7 +1,7 @@
-package com.eventsourcing.market.domain.base;
+package com.eventsourcing.market.domain.model;
 
+import com.eventsourcing.market.domain.events.DomainEvent;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public abstract class EventSourcedAggregate extends Entity {
 
     public void apply(DomainEvent change) {
         version++;
-        change.setAggregateVersion(version);
+        change.setEventNumber(version);
         applyEvent(change);
     }
 

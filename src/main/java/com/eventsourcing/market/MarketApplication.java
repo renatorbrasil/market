@@ -1,6 +1,15 @@
 package com.eventsourcing.market;
 
+import com.eventsourcing.market.application.command.NewOrderCommand;
+import com.eventsourcing.market.application.processor.NewOrderCommandProcessor;
+import com.eventsourcing.market.domain.exception.DomainException;
 import com.eventsourcing.market.domain.model.*;
+import com.eventsourcing.market.domain.model.order.Order;
+import com.eventsourcing.market.domain.model.order.ProductOrder;
+import com.eventsourcing.market.domain.model.product.Product;
+import com.eventsourcing.market.domain.model.user.Account;
+import com.eventsourcing.market.domain.model.user.Address;
+import com.eventsourcing.market.domain.model.user.User;
 import com.eventsourcing.market.domain.repository.OrderRepository;
 import com.eventsourcing.market.domain.repository.ProductRepository;
 import com.eventsourcing.market.domain.repository.UserRepository;
@@ -10,8 +19,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 @SpringBootApplication
 public class MarketApplication {
@@ -25,6 +33,9 @@ public class MarketApplication {
 	@Autowired
 	OrderRepository orderRepository;
 
+	@Autowired
+	NewOrderCommandProcessor commandProcessor;
+
 	public static void main(String[] args) {
 		SpringApplication.run(MarketApplication.class, args);
 	}
@@ -32,26 +43,25 @@ public class MarketApplication {
 	@EventListener(ApplicationReadyEvent.class)
 	public void doSomethingAfterStartup() {
 
-		User user = new User(new Address("Rua Marquês de Maricá"), new Account(new Money(50.0)));
-		user.makePayment(new Money(10.0));
-		user.changeAddress(new Address("Rua Alvarenga Peixoto"));
+		try {
+			User user = new User(new Address("Rua Marquês de Maricá"), new Account(new Money(5000.0)));
+			userRepository.save(user);
 
-		userRepository.save(user);
+			Product product1 = new Product("Cadeira", 100L, new Money(100.0));
+			Product product2 = new Product("Mesa", 50L, new Money(200.0));
+			productRepository.save(product1);
+			productRepository.save(product2);
 
-		Product product1 = new Product("Cadeira", 100L, new Money(100.0));
-		Product product2 = new Product("Mesa", 50L, new Money(200.0));
+			Map<UUID, Long> productOrders = new HashMap<>();
+			productOrders.put(product1.getId(), 2000L);
+			productOrders.put(product2.getId(), 10L);
+			var newOrderCommand = new NewOrderCommand(productOrders, user.getId());
 
-		System.out.println(product1.getId());
+			commandProcessor.processCommand(newOrderCommand);
 
-		productRepository.save(product1);
-		productRepository.save(product2);
-
-		var productMap = new HashMap<Product, Long>();
-		productMap.put(product1, 20L);
-		productMap.put(product2, 2L);
-
-		Order order = new Order(productMap, user);
-		orderRepository.save(order);
+		} catch (DomainException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

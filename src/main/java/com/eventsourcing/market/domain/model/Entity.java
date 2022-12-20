@@ -1,4 +1,4 @@
-package com.eventsourcing.market.domain.base;
+package com.eventsourcing.market.domain.model;
 
 import lombok.Getter;
 

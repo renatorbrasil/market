@@ -1,8 +1,7 @@
-package com.eventsourcing.market.domain.model.events;
+package com.eventsourcing.market.domain.events;
 
 import com.eventsourcing.market.config.mongo.DocumentType;
-import com.eventsourcing.market.domain.base.DomainEvent;
-import com.eventsourcing.market.domain.model.Address;
+import com.eventsourcing.market.domain.model.user.Address;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -16,5 +15,5 @@ public class UserChangeAddressEvent extends DomainEvent {
     }
 
     @Getter
-    private Address address;
+    private final Address address;
 }

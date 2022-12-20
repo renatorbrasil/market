@@ -1,7 +1,6 @@
-package com.eventsourcing.market.domain.model.events;
+package com.eventsourcing.market.domain.events;
 
 import com.eventsourcing.market.config.mongo.DocumentType;
-import com.eventsourcing.market.domain.base.DomainEvent;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -15,5 +14,5 @@ public class ProductConsumedEvent extends DomainEvent {
     }
 
     @Getter
-    private Long amount;
+    private final Long amount;
 }

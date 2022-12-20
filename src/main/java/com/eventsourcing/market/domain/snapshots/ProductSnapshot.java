@@ -1,5 +1,6 @@
-package com.eventsourcing.market.domain.model.snapshots;
+package com.eventsourcing.market.domain.snapshots;
 
+import com.eventsourcing.market.domain.model.Money;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,4 +11,6 @@ import java.util.UUID;
 public class ProductSnapshot {
     private UUID id;
     private String name;
+    private Long availableAmount;
+    private Money price;
 }

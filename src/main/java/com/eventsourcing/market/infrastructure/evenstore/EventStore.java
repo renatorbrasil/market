@@ -1,7 +1,7 @@
 package com.eventsourcing.market.infrastructure.evenstore;
 
-import com.eventsourcing.market.domain.base.DomainEvent;
-import com.eventsourcing.market.domain.base.EventSourcedAggregate;
+import com.eventsourcing.market.domain.events.DomainEvent;
+import com.eventsourcing.market.domain.model.EventSourcedAggregate;
 import com.eventsourcing.market.infrastructure.exception.ConcurrencyException;
 import com.eventsourcing.market.infrastructure.exception.InvalidRegisterException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,19 +29,19 @@ public class EventStore {
         }
 
         var earliestUncommitedEvent = events.stream()
-                .mapToInt(DomainEvent::getAggregateVersion)
+                .mapToInt(DomainEvent::getEventNumber)
                 .min()
                 .getAsInt();
 
         if (latestEvent.isPresent() &&
-                latestEvent.get().getAggregateVersion() >= earliestUncommitedEvent) {
+                latestEvent.get().getEventNumber() >= earliestUncommitedEvent) {
             throw new ConcurrencyException(aggregate.getId());
         }
         mongoRepository.saveAll(events);
     }
 
     public List<DomainEvent> findByAggregateId(UUID aggregateId) {
-        return mongoRepository.findByAggregateIdOrderByAggregateVersion(aggregateId);
+        return mongoRepository.findByAggregateIdOrderByEventNumber(aggregateId);
     }
 
 }

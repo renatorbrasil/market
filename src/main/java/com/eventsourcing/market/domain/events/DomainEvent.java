@@ -1,4 +1,4 @@
-package com.eventsourcing.market.domain.base;
+package com.eventsourcing.market.domain.events;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +15,7 @@ public abstract class DomainEvent {
     protected UUID aggregateId;
 
     @Getter @Setter
-    protected Integer aggregateVersion;
+    protected Integer eventNumber;
 
     @Getter
     protected LocalDateTime timestamp;

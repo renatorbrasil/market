@@ -1,6 +1,6 @@
 package com.eventsourcing.market.domain.repository;
 
-import com.eventsourcing.market.domain.model.User;
+import com.eventsourcing.market.domain.model.user.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.UUID;

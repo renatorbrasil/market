@@ -1,11 +1,13 @@
-package com.eventsourcing.market.domain.model;
+package com.eventsourcing.market.domain.model.user;
 
-import com.eventsourcing.market.domain.base.DomainEvent;
-import com.eventsourcing.market.domain.base.EventSourcedAggregate;
+import com.eventsourcing.market.domain.events.DomainEvent;
 import com.eventsourcing.market.domain.exception.EventNotSupportedException;
-import com.eventsourcing.market.domain.model.events.UserAccountDebitEvent;
-import com.eventsourcing.market.domain.model.events.UserChangeAddressEvent;
-import com.eventsourcing.market.domain.model.events.UserCreatedEvent;
+import com.eventsourcing.market.domain.events.UserAccountDebitEvent;
+import com.eventsourcing.market.domain.events.UserChangeAddressEvent;
+import com.eventsourcing.market.domain.events.UserCreatedEvent;
+import com.eventsourcing.market.domain.model.EventSourcedAggregate;
+import com.eventsourcing.market.domain.model.Money;
+import com.eventsourcing.market.domain.snapshots.UserSnapshot;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -21,6 +23,10 @@ public class User extends EventSourcedAggregate {
     public User(Address address, Account account) {
         super();
         causes(new UserCreatedEvent(getId(), account, address));
+    }
+
+    public UserSnapshot getSnapshot() {
+        return new UserSnapshot(getId(), account, address);
     }
 
     public User(UUID id) {

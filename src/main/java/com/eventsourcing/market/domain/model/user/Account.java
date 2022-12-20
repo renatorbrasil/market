@@ -1,7 +1,8 @@
-package com.eventsourcing.market.domain.model;
+package com.eventsourcing.market.domain.model.user;
 
 import com.eventsourcing.market.domain.exception.InvalidMoneyAmountException;
 import com.eventsourcing.market.domain.exception.NoFundsException;
+import com.eventsourcing.market.domain.model.Money;
 
 import java.math.BigDecimal;
 

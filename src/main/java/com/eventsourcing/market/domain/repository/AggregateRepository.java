@@ -1,6 +1,6 @@
 package com.eventsourcing.market.domain.repository;
 
-import com.eventsourcing.market.domain.base.EventSourcedAggregate;
+import com.eventsourcing.market.domain.model.EventSourcedAggregate;
 import com.eventsourcing.market.infrastructure.evenstore.EventStore;
 import org.springframework.beans.factory.annotation.Autowired;
 
