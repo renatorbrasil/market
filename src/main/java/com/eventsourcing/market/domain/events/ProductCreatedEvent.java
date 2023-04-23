@@ -9,10 +9,10 @@ import java.util.UUID;
 @DocumentType("Product.Created")
 public class ProductCreatedEvent extends DomainEvent {
 
-    public ProductCreatedEvent(UUID aggregateId, String name, Long availableAmount, Money price) {
+    public ProductCreatedEvent(UUID aggregateId, String name, String description, Money price) {
         super(aggregateId);
         this.name = name;
-        this.availableAmount = availableAmount;
+        this.description = description;
         this.price = price;
     }
 
@@ -20,7 +20,7 @@ public class ProductCreatedEvent extends DomainEvent {
     private final String name;
 
     @Getter
-    private final Long availableAmount;
+    private final String description;
 
     @Getter
     private final Money price;

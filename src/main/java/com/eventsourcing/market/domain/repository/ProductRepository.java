@@ -3,10 +3,7 @@ package com.eventsourcing.market.domain.repository;
 import com.eventsourcing.market.domain.model.product.Product;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Repository
 public class ProductRepository extends AggregateRepository<Product> {
@@ -16,7 +13,7 @@ public class ProductRepository extends AggregateRepository<Product> {
         return new Product(productId);
     }
 
-    public List<Product> findByIdSet(Set<UUID> productIds) {
+    public List<Product> findByIdSet(Collection<UUID> productIds) {
         List<Product> products = new ArrayList<>();
         productIds.forEach(id -> {
             Product product = findById(id);

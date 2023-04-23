@@ -11,6 +11,7 @@ import java.util.UUID;
 public class ProductSnapshot {
     private UUID id;
     private String name;
-    private Long availableAmount;
+    private String description;
+    private boolean onStock;
     private Money price;
 }

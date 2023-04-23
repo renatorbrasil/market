@@ -28,13 +28,13 @@ public class EventStore {
             throw new InvalidRegisterException();
         }
 
-        var earliestUncommitedEvent = events.stream()
+        var earliestUncommittedEvent = events.stream()
                 .mapToInt(DomainEvent::getEventNumber)
                 .min()
                 .getAsInt();
 
         if (latestEvent.isPresent() &&
-                latestEvent.get().getEventNumber() >= earliestUncommitedEvent) {
+                latestEvent.get().getEventNumber() >= earliestUncommittedEvent) {
             throw new ConcurrencyException(aggregate.getId());
         }
         mongoRepository.saveAll(events);

@@ -1,14 +1,14 @@
-package com.eventsourcing.market.application.command;
+package com.eventsourcing.market.web.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.UUID;
 
-@AllArgsConstructor
 @Getter
-public class NewOrderCommand {
+@Setter
+public class NewOrderDto {
     private List<UUID> productIds;
     private UUID userId;
 }
