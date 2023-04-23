@@ -48,11 +48,10 @@ public class MarketApplication {
 			productRepository.save(product1);
 			productRepository.save(product2);
 
-			Map<UUID, Long> productOrders = new HashMap<>();
-			productOrders.put(product1.getId(), 200L);
-			productOrders.put(product2.getId(), 10L);
+			var productList = List.of(product1.getId(), product2.getId());
 
-			//commandProcessor.processCommand(newOrderCommand);
+			var newOrderCommand = new NewOrderCommand(productList, user.getId());
+			commandProcessor.processCommand(newOrderCommand);
 
 		} catch (ApplicationException e) {
 			e.printStackTrace();

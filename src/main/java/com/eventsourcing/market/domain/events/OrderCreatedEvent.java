@@ -1,14 +1,11 @@
 package com.eventsourcing.market.domain.events;
 
 import com.eventsourcing.market.config.mongo.DocumentType;
-import com.eventsourcing.market.domain.model.order.ProductOrder;
-import com.eventsourcing.market.domain.model.user.User;
 import com.eventsourcing.market.domain.snapshots.ProductSnapshot;
 import com.eventsourcing.market.domain.snapshots.UserSnapshot;
 import lombok.Getter;
 
 import java.util.Collection;
-import java.util.Set;
 import java.util.UUID;
 
 @DocumentType("Order.Created")
