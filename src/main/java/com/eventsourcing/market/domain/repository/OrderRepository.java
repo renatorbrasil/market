@@ -1,6 +1,6 @@
 package com.eventsourcing.market.domain.repository;
 
-import com.eventsourcing.market.domain.model.Snapshot;
+import com.eventsourcing.market.domain.snapshot.Snapshot;
 import com.eventsourcing.market.domain.model.order.Order;
 import com.eventsourcing.market.domain.snapshot.OrderSnapshot;
 import org.springframework.stereotype.Repository;

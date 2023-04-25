@@ -1,7 +1,6 @@
 package com.eventsourcing.market.domain.snapshot;
 
 import com.eventsourcing.market.config.mongo.DocumentType;
-import com.eventsourcing.market.domain.model.Snapshot;
 import com.eventsourcing.market.domain.model.order.OrderStatus;
 import lombok.Getter;
 

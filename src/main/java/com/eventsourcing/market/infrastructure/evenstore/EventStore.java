@@ -2,7 +2,7 @@ package com.eventsourcing.market.infrastructure.evenstore;
 
 import com.eventsourcing.market.domain.events.DomainEvent;
 import com.eventsourcing.market.domain.model.EventSourcedAggregate;
-import com.eventsourcing.market.domain.model.Snapshot;
+import com.eventsourcing.market.domain.snapshot.Snapshot;
 import com.eventsourcing.market.infrastructure.exception.ConcurrencyException;
 import com.eventsourcing.market.infrastructure.exception.InvalidRegisterException;
 import lombok.RequiredArgsConstructor;

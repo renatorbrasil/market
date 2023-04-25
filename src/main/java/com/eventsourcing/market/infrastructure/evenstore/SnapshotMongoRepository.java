@@ -1,6 +1,6 @@
 package com.eventsourcing.market.infrastructure.evenstore;
 
-import com.eventsourcing.market.domain.model.Snapshot;
+import com.eventsourcing.market.domain.snapshot.Snapshot;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
