@@ -1,10 +1,11 @@
 package com.eventsourcing.market.domain.model.user;
 
 import com.eventsourcing.market.domain.events.DomainEvent;
-import com.eventsourcing.market.domain.exception.EventNotSupportedException;
 import com.eventsourcing.market.domain.events.UserChangeAddressEvent;
 import com.eventsourcing.market.domain.events.UserCreatedEvent;
+import com.eventsourcing.market.domain.exception.EventNotSupportedException;
 import com.eventsourcing.market.domain.model.EventSourcedAggregate;
+import com.eventsourcing.market.domain.snapshot.UserSnapshot;
 import lombok.Getter;
 
 import java.util.UUID;

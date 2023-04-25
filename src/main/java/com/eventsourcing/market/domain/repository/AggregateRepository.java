@@ -40,6 +40,10 @@ public abstract class AggregateRepository<T extends EventSourcedAggregate> {
         return aggregate;
     }
 
+    public void saveSnapshot(Snapshot snapshot) {
+        eventStore.storeSnapshot(snapshot);
+    }
+
     public abstract T getInstance(UUID aggregateId);
 
     public abstract T getInstanceFromSnapshot(Snapshot snapshot);

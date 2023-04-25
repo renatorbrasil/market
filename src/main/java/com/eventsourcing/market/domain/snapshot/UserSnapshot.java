@@ -1,11 +1,14 @@
-package com.eventsourcing.market.domain.model.user;
+package com.eventsourcing.market.domain.snapshot;
 
+import com.eventsourcing.market.config.mongo.DocumentType;
 import com.eventsourcing.market.domain.model.Snapshot;
+import com.eventsourcing.market.domain.model.user.Address;
 import lombok.Getter;
 
 import java.util.UUID;
 
 @Getter
+@DocumentType("Snapshot.User")
 public class UserSnapshot extends Snapshot {
 
     private Address address;

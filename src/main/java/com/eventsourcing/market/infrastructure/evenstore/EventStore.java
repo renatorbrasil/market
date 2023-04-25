@@ -55,4 +55,8 @@ public class EventStore {
         return snapshotRepository.findLatestByAggregateId(aggregateId);
     }
 
+    public void storeSnapshot(Snapshot snapshot) {
+        snapshotRepository.save(snapshot);
+    }
+
 }

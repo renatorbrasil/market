@@ -6,8 +6,9 @@ import com.eventsourcing.market.domain.exception.EventNotSupportedException;
 import com.eventsourcing.market.domain.exception.ProductIsNotAvailableException;
 import com.eventsourcing.market.domain.model.EventSourcedAggregate;
 import com.eventsourcing.market.domain.model.Money;
-import com.eventsourcing.market.domain.model.product.ProductSnapshot;
-import com.eventsourcing.market.domain.model.user.UserSnapshot;
+import com.eventsourcing.market.domain.snapshot.OrderSnapshot;
+import com.eventsourcing.market.domain.snapshot.ProductSnapshot;
+import com.eventsourcing.market.domain.snapshot.UserSnapshot;
 
 import java.util.Collection;
 import java.util.List;

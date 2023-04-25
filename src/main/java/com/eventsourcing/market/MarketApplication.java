@@ -3,7 +3,7 @@ package com.eventsourcing.market;
 import com.eventsourcing.market.application.command.NewOrderCommand;
 import com.eventsourcing.market.application.exception.ApplicationException;
 import com.eventsourcing.market.application.processor.NewOrderCommandProcessor;
-import com.eventsourcing.market.domain.model.*;
+import com.eventsourcing.market.domain.model.Money;
 import com.eventsourcing.market.domain.model.product.Product;
 import com.eventsourcing.market.domain.model.user.Address;
 import com.eventsourcing.market.domain.model.user.User;
@@ -16,7 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 
-import java.util.*;
+import java.util.List;
 
 @SpringBootApplication
 public class MarketApplication {

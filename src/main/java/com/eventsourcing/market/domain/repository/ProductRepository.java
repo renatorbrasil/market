@@ -2,10 +2,13 @@ package com.eventsourcing.market.domain.repository;
 
 import com.eventsourcing.market.domain.model.Snapshot;
 import com.eventsourcing.market.domain.model.product.Product;
-import com.eventsourcing.market.domain.model.product.ProductSnapshot;
+import com.eventsourcing.market.domain.snapshot.ProductSnapshot;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class ProductRepository extends AggregateRepository<Product> {

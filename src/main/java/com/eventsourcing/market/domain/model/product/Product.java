@@ -1,11 +1,12 @@
 package com.eventsourcing.market.domain.model.product;
 
 import com.eventsourcing.market.domain.events.DomainEvent;
+import com.eventsourcing.market.domain.events.ProductCreatedEvent;
 import com.eventsourcing.market.domain.events.ProductOutOfStockEvent;
 import com.eventsourcing.market.domain.exception.EventNotSupportedException;
-import com.eventsourcing.market.domain.events.ProductCreatedEvent;
 import com.eventsourcing.market.domain.model.EventSourcedAggregate;
 import com.eventsourcing.market.domain.model.Money;
+import com.eventsourcing.market.domain.snapshot.ProductSnapshot;
 
 import java.util.UUID;
 

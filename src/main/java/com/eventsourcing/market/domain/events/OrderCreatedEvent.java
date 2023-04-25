@@ -1,8 +1,8 @@
 package com.eventsourcing.market.domain.events;
 
 import com.eventsourcing.market.config.mongo.DocumentType;
-import com.eventsourcing.market.domain.model.product.ProductSnapshot;
-import com.eventsourcing.market.domain.model.user.UserSnapshot;
+import com.eventsourcing.market.domain.snapshot.ProductSnapshot;
+import com.eventsourcing.market.domain.snapshot.UserSnapshot;
 import lombok.Getter;
 
 import java.util.Collection;

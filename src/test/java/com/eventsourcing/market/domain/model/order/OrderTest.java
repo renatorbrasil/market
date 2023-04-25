@@ -5,11 +5,9 @@ import com.eventsourcing.market.domain.model.Money;
 import com.eventsourcing.market.domain.model.product.Product;
 import com.eventsourcing.market.domain.model.user.Address;
 import com.eventsourcing.market.domain.model.user.User;
-import com.eventsourcing.market.domain.model.user.UserSnapshot;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
