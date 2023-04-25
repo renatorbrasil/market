@@ -1,11 +1,11 @@
 package com.eventsourcing.market.domain.model.product;
 
 import com.eventsourcing.market.domain.events.DomainEvent;
+import com.eventsourcing.market.domain.events.ProductOutOfStockEvent;
 import com.eventsourcing.market.domain.exception.EventNotSupportedException;
 import com.eventsourcing.market.domain.events.ProductCreatedEvent;
 import com.eventsourcing.market.domain.model.EventSourcedAggregate;
 import com.eventsourcing.market.domain.model.Money;
-import com.eventsourcing.market.domain.snapshots.ProductSnapshot;
 
 import java.util.UUID;
 
@@ -25,25 +25,23 @@ public class Product extends EventSourcedAggregate {
         super(id);
     }
 
+    public Product(ProductSnapshot snapshot) {
+        super(snapshot.getAggregateId(), snapshot.getEventNumber());
+        this.name = snapshot.getName();
+        this.description = snapshot.getDescription();
+        this.price = snapshot.getPrice();
+        this.onStock = snapshot.isOnStock();
+    }
+
     @Override
     protected void applyEvent(DomainEvent change) {
         if (change instanceof ProductCreatedEvent) {
             when((ProductCreatedEvent) change);
+        } else if (change instanceof ProductOutOfStockEvent) {
+            when((ProductOutOfStockEvent) change);
         } else {
             throw new EventNotSupportedException();
         }
-    }
-
-    public boolean isOnStock() {
-        return onStock;
-    }
-
-    public void changeName(String name) {
-        this.name = name;
-    }
-
-    public void changePrice(Money price) {
-        this.price = price;
     }
 
     private void when(ProductCreatedEvent event) {
@@ -53,7 +51,19 @@ public class Product extends EventSourcedAggregate {
         this.onStock = true;
     }
 
+    private void when(ProductOutOfStockEvent event) {
+        this.onStock = false;
+    }
+
+    public boolean isOnStock() {
+        return onStock;
+    }
+
+    public void setOutOfStock() {
+        causes(new ProductOutOfStockEvent(getId()));
+    }
+
     public ProductSnapshot getSnapshot() {
-        return new ProductSnapshot(id, name, description, onStock, price);
+        return new ProductSnapshot(id, name, description, onStock, price, version);
     }
 }

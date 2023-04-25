@@ -5,7 +5,6 @@ import com.eventsourcing.market.domain.exception.EventNotSupportedException;
 import com.eventsourcing.market.domain.events.UserChangeAddressEvent;
 import com.eventsourcing.market.domain.events.UserCreatedEvent;
 import com.eventsourcing.market.domain.model.EventSourcedAggregate;
-import com.eventsourcing.market.domain.snapshots.UserSnapshot;
 import lombok.Getter;
 
 import java.util.UUID;
@@ -20,8 +19,13 @@ public class User extends EventSourcedAggregate {
         causes(new UserCreatedEvent(getId(), address));
     }
 
+    public User(UserSnapshot snapshot) {
+        super(snapshot.getAggregateId(), snapshot.getEventNumber());
+        this.address = snapshot.getAddress();
+    }
+
     public UserSnapshot getSnapshot() {
-        return new UserSnapshot(getId(), address);
+        return new UserSnapshot(getId(), address, version);
     }
 
     public User(UUID id) {

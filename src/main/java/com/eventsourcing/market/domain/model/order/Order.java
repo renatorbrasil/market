@@ -6,8 +6,8 @@ import com.eventsourcing.market.domain.exception.EventNotSupportedException;
 import com.eventsourcing.market.domain.exception.ProductIsNotAvailableException;
 import com.eventsourcing.market.domain.model.EventSourcedAggregate;
 import com.eventsourcing.market.domain.model.Money;
-import com.eventsourcing.market.domain.snapshots.ProductSnapshot;
-import com.eventsourcing.market.domain.snapshots.UserSnapshot;
+import com.eventsourcing.market.domain.model.product.ProductSnapshot;
+import com.eventsourcing.market.domain.model.user.UserSnapshot;
 
 import java.util.Collection;
 import java.util.List;
@@ -28,6 +28,13 @@ public class Order extends EventSourcedAggregate {
         super(id);
     }
 
+    public Order(OrderSnapshot snapshot) {
+        super(snapshot.getAggregateId(), snapshot.getEventNumber());
+        this.products = snapshot.getProducts();
+        this.userId = snapshot.getUserId();
+        this.status = snapshot.getStatus();
+    }
+
     @Override
     protected void applyEvent(DomainEvent change) {
         if (change instanceof OrderCreatedEvent) {
@@ -35,13 +42,16 @@ public class Order extends EventSourcedAggregate {
         } else {
             throw new EventNotSupportedException();
         }
-
     }
 
     public Money getTotalPrice() {
         return products.stream()
                 .map(ProductSnapshot::getPrice)
                 .reduce(new Money(), Money::add);
+    }
+
+    public OrderSnapshot getSnapshot() {
+        return new OrderSnapshot(getId(), products, userId, status, version);
     }
 
     private void when(OrderCreatedEvent event) {
@@ -54,6 +64,5 @@ public class Order extends EventSourcedAggregate {
         this.userId = event.getUser().getId();
         this.products = event.getProducts();
     }
-
 
 }

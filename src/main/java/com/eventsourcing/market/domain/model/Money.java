@@ -2,8 +2,6 @@ package com.eventsourcing.market.domain.model;
 
 import com.eventsourcing.market.domain.exception.InvalidMoneyAmountException;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

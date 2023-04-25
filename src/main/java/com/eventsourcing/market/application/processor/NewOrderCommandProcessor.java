@@ -10,7 +10,6 @@ import com.eventsourcing.market.domain.repository.OrderRepository;
 import com.eventsourcing.market.domain.repository.ProductRepository;
 import com.eventsourcing.market.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service

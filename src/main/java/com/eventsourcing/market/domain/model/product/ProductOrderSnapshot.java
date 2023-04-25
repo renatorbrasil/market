@@ -1,4 +1,4 @@
-package com.eventsourcing.market.domain.snapshots;
+package com.eventsourcing.market.domain.model.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

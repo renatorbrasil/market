@@ -2,24 +2,31 @@ package com.eventsourcing.market.infrastructure.evenstore;
 
 import com.eventsourcing.market.domain.events.DomainEvent;
 import com.eventsourcing.market.domain.model.EventSourcedAggregate;
+import com.eventsourcing.market.domain.model.Snapshot;
 import com.eventsourcing.market.infrastructure.exception.ConcurrencyException;
 import com.eventsourcing.market.infrastructure.exception.InvalidRegisterException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @Lazy
+@RequiredArgsConstructor
 public class EventStore {
 
     @Autowired
-    CustomMongoRepository mongoRepository;
+    final DomainEventMongoRepository domainEventRepository;
+
+    @Autowired
+    final SnapshotMongoRepository snapshotRepository;
 
     public void storeEventList(List<DomainEvent> events, EventSourcedAggregate aggregate) {
-        var latestEvent = mongoRepository.findLatestByAggregateId(aggregate.getId());
+        var latestEvent = domainEventRepository.findLatestByAggregateId(aggregate.getId());
 
         if (events.isEmpty()) return;
 
@@ -37,11 +44,15 @@ public class EventStore {
                 latestEvent.get().getEventNumber() >= earliestUncommittedEvent) {
             throw new ConcurrencyException(aggregate.getId());
         }
-        mongoRepository.saveAll(events);
+        domainEventRepository.saveAll(events);
     }
 
-    public List<DomainEvent> findByAggregateId(UUID aggregateId) {
-        return mongoRepository.findByAggregateIdOrderByEventNumber(aggregateId);
+    public List<DomainEvent> findByAggregateIdFromVersion(UUID aggregateId, Integer version) {
+        return domainEventRepository.findByAggregateIdFromVersion(aggregateId, version);
+    }
+
+    public Optional<Snapshot> findLatestSnapshotByAggregateId(UUID aggregateId) {
+        return snapshotRepository.findLatestByAggregateId(aggregateId);
     }
 
 }

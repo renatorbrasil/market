@@ -1,8 +1,7 @@
 package com.eventsourcing.market.domain.model.order;
 
 import com.eventsourcing.market.domain.model.Money;
-import com.eventsourcing.market.domain.model.product.Product;
-import com.eventsourcing.market.domain.snapshots.ProductSnapshot;
+import com.eventsourcing.market.domain.model.product.ProductSnapshot;
 
 import java.math.BigDecimal;
 import java.util.UUID;

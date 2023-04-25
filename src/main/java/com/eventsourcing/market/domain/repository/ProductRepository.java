@@ -1,6 +1,8 @@
 package com.eventsourcing.market.domain.repository;
 
+import com.eventsourcing.market.domain.model.Snapshot;
 import com.eventsourcing.market.domain.model.product.Product;
+import com.eventsourcing.market.domain.model.product.ProductSnapshot;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -11,6 +13,11 @@ public class ProductRepository extends AggregateRepository<Product> {
     @Override
     public Product getInstance(UUID productId) {
         return new Product(productId);
+    }
+
+    @Override
+    public Product getInstanceFromSnapshot(Snapshot snapshot) {
+        return new Product((ProductSnapshot) snapshot);
     }
 
     public List<Product> findByIdSet(Collection<UUID> productIds) {

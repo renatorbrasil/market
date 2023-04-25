@@ -23,6 +23,11 @@ public abstract class EventSourcedAggregate extends Entity {
         super(id);
     }
 
+    public EventSourcedAggregate(UUID id, Integer version) {
+        super(id);
+        this.version = version;
+    }
+
     protected abstract void applyEvent(DomainEvent change);
 
     public void apply(DomainEvent change) {
