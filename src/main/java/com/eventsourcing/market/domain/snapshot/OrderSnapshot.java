@@ -11,9 +11,9 @@ import java.util.UUID;
 @DocumentType("Snapshot.Order")
 public class OrderSnapshot extends Snapshot {
 
-    private Collection<ProductSnapshot> products;
-    private UUID userId;
-    private OrderStatus status;
+    private final Collection<ProductSnapshot> products;
+    private final UUID userId;
+    private final OrderStatus status;
 
     public OrderSnapshot(
         UUID aggregateId,

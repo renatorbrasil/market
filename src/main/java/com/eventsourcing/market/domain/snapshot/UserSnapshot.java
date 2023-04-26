@@ -10,7 +10,7 @@ import java.util.UUID;
 @DocumentType("Snapshot.User")
 public class UserSnapshot extends Snapshot {
 
-    private Address address;
+    private final Address address;
 
     public UserSnapshot(
             UUID aggregateId,

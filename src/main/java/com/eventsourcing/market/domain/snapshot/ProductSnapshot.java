@@ -9,10 +9,10 @@ import java.util.UUID;
 @Getter
 @DocumentType("Snapshot.Product")
 public class ProductSnapshot extends Snapshot {
-    private String name;
-    private String description;
-    private boolean onStock;
-    private Money price;
+    private final String name;
+    private final String description;
+    private final boolean onStock;
+    private final Money price;
 
     public ProductSnapshot(
             UUID aggregateId,

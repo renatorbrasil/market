@@ -44,8 +44,8 @@ public abstract class AggregateRepository<T extends EventSourcedAggregate> {
         eventStore.storeSnapshot(snapshot);
     }
 
-    public abstract T getInstance(UUID aggregateId);
+    protected abstract T getInstance(UUID aggregateId);
 
-    public abstract T getInstanceFromSnapshot(Snapshot snapshot);
+    protected abstract T getInstanceFromSnapshot(Snapshot snapshot);
 
 }

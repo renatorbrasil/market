@@ -12,7 +12,7 @@ public interface DomainEventMongoRepository extends MongoRepository<DomainEvent,
 
     @Aggregation(pipeline = {
         "{ '$match': {'aggregateId': ?0, 'eventNumber': { $gt: ?1 } } }",
-        "{ '$sort': {'eventNumber': -1} }"
+        "{ '$sort': { 'eventNumber': 1 } }"
     })
     List<DomainEvent> findByAggregateIdFromVersion(UUID aggregateId, Integer version);
 

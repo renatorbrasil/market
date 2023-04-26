@@ -48,10 +48,15 @@ public class MarketApplication {
 			productRepository.save(product1);
 			productRepository.save(product2);
 
-			var productList = List.of(product1.getId(), product2.getId());
+			System.out.println("Product 1: " + product1.getId());
+			System.out.println("Product 2: " + product2.getId());
+
+			System.out.println("User: " + user.getId());
+
+/*			var productList = List.of(product1.getId(), product2.getId());
 
 			var newOrderCommand = new NewOrderCommand(productList, user.getId());
-			commandProcessor.processCommand(newOrderCommand);
+			commandProcessor.processCommand(newOrderCommand);*/
 
 		} catch (ApplicationException e) {
 			e.printStackTrace();

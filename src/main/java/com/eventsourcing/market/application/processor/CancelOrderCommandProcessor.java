@@ -1,5 +1,6 @@
 package com.eventsourcing.market.application.processor;
 
+import com.eventsourcing.market.application.command.CancelOrderCommand;
 import com.eventsourcing.market.application.command.NewOrderCommand;
 import com.eventsourcing.market.application.exception.ApplicationException;
 import com.eventsourcing.market.domain.exception.DomainException;
@@ -16,27 +17,18 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class NewOrderCommandProcessor {
+public class CancelOrderCommandProcessor {
 
-    final UserRepository userRepository;
-    final ProductRepository productRepository;
     final OrderRepository orderRepository;
-    
-    public UUID processCommand(NewOrderCommand command) {
+
+    public void processCommand(CancelOrderCommand command) {
         try {
-            User user =  userRepository.findById(command.getUserId());
 
-            var products = productRepository.findByIdSet(
-                    command.getProductIds());
+            var order = orderRepository.findById(command.getOrderId());
 
-            var productSnapshots = products.stream()
-                    .map(Product::getSnapshot).toList();
-
-            Order order = new Order(productSnapshots, user.getSnapshot());
+            order.cancel();
 
             orderRepository.save(order);
-
-            return order.getId();
 
         } catch (DomainException e) {
             throw new ApplicationException(e.getMessage());
