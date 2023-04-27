@@ -1,8 +1,8 @@
 package com.eventsourcing.market.domain.repository;
 
-import com.eventsourcing.market.domain.snapshot.Snapshot;
 import com.eventsourcing.market.domain.model.product.Product;
 import com.eventsourcing.market.domain.snapshot.ProductSnapshot;
+import com.eventsourcing.market.domain.snapshot.Snapshot;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
