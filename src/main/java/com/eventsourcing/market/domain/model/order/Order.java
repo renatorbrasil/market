@@ -8,9 +8,10 @@ import com.eventsourcing.market.domain.exception.OrderMayNoLongerBeCanceledExcep
 import com.eventsourcing.market.domain.exception.ProductIsNotAvailableException;
 import com.eventsourcing.market.domain.model.EventSourcedAggregate;
 import com.eventsourcing.market.domain.model.Money;
+import com.eventsourcing.market.domain.model.product.Product;
+import com.eventsourcing.market.domain.model.user.User;
 import com.eventsourcing.market.domain.snapshot.OrderSnapshot;
 import com.eventsourcing.market.domain.snapshot.ProductSnapshot;
-import com.eventsourcing.market.domain.snapshot.UserSnapshot;
 
 import java.util.Collection;
 import java.util.List;
@@ -22,9 +23,14 @@ public class Order extends EventSourcedAggregate {
     private UUID userId;
     private OrderStatus status;
 
-    public Order(List<ProductSnapshot> products, UserSnapshot user) {
+    public Order(List<Product> products, User user) {
         super();
-        causes(new OrderCreatedEvent(getId(), products, user));
+
+        var productSnapshots = products.stream()
+                .map(Product::getSnapshot).toList();
+        var userSnapshot = user.getSnapshot();
+
+        causes(new OrderCreatedEvent(getId(), productSnapshots, userSnapshot));
     }
 
     public Order(UUID id) {
@@ -81,4 +87,14 @@ public class Order extends EventSourcedAggregate {
         this.status = OrderStatus.CANCELED;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", version=" + version +
+                ", products=" + products +
+                ", userId=" + userId +
+                ", status=" + status +
+                '}';
+    }
 }

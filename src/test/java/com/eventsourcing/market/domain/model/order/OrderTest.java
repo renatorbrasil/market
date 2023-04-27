@@ -17,14 +17,14 @@ class OrderTest {
     @Test
     void itShouldCreateOrderSuccessfully() {
         // Given
-        var productSs1 = new Product("Chair", "For sitting on", new Money(10.0)).getSnapshot();
-        var productSs2 = new Product("Table", "For sitting on", new Money(100.0)).getSnapshot();
-        var products = List.of(productSs1, productSs2);
+        var product1 = new Product("Chair", "For sitting on", new Money(10.0));
+        var product2 = new Product("Table", "For sitting on", new Money(100.0));
+        var products = List.of(product1, product2);
 
-        var userSnapshot = new User(new Address("Random Street, London")).getSnapshot();
+        var user = new User(new Address("Random Street, London"));
 
         // When
-        var newOrder = new Order(products, userSnapshot);
+        var newOrder = new Order(products, user);
 
         // Then
         assertThat(newOrder.getId()).isNotNull();
@@ -35,28 +35,27 @@ class OrderTest {
         // Given
         var product1 = new Product("Chair", "For sitting on", new Money(10.0));
         product1.setOutOfStock();
-        var productSs1 = product1.getSnapshot();
 
-        var productSs2 = new Product("Table", "For sitting on", new Money(100.0)).getSnapshot();
-        var products = List.of(productSs1, productSs2);
-        var userSnapshot = new User(new Address("Random Street, London")).getSnapshot();
+        var product2 = new Product("Table", "For sitting on", new Money(100.0));
+        var products = List.of(product1, product2);
+        var user = new User(new Address("Random Street, London"));
 
         // When
         // Then
-        assertThatThrownBy(() -> new Order(products, userSnapshot))
+        assertThatThrownBy(() -> new Order(products, user))
                 .isInstanceOf(ProductIsNotAvailableException.class);
     }
 
     @Test
     void itShouldCalculateOrderPriceCorrectly() {
         // Given
-        var productSs1 = new Product("Chair", "For sitting on", new Money(10.0)).getSnapshot();
-        var productSs2 = new Product("Table", "For sitting on", new Money(100.0)).getSnapshot();
-        var products = List.of(productSs1, productSs2, productSs2);
-        var userSnapshot = new User(new Address("Random Street, London")).getSnapshot();
+        var product1 = new Product("Chair", "For sitting on", new Money(10.0));
+        var product2 = new Product("Table", "For sitting on", new Money(100.0));
+        var products = List.of(product1, product2, product2);
+        var user = new User(new Address("Random Street, London"));
 
         // When
-        var newOrder = new Order(products, userSnapshot);
+        var newOrder = new Order(products, user);
 
         // Then
         assertThat(newOrder.getTotalPrice()).isEqualTo(new Money(210.0));

@@ -53,10 +53,24 @@ public class MarketApplication {
 
 			System.out.println("User: " + user.getId());
 
-/*			var productList = List.of(product1.getId(), product2.getId());
+			var productList = List.of(product1.getId(), product2.getId());
 
 			var newOrderCommand = new NewOrderCommand(productList, user.getId());
-			commandProcessor.processCommand(newOrderCommand);*/
+			var orderId = commandProcessor.processCommand(newOrderCommand);
+
+			var order = orderRepository.findById(orderId);
+
+			System.out.println(order);
+
+			order.cancel();
+
+			orderRepository.save(order);
+
+			var order2 = orderRepository.findById(orderId);
+
+			System.out.println(order2);
+
+			System.out.println(order2.getTotalPrice());
 
 		} catch (ApplicationException e) {
 			e.printStackTrace();

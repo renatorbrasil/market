@@ -67,4 +67,16 @@ public class Product extends EventSourcedAggregate {
     public ProductSnapshot getSnapshot() {
         return new ProductSnapshot(id, name, description, onStock, price, version);
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", onStock=" + onStock +
+                '}';
+    }
 }

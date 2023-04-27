@@ -15,6 +15,8 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address: " + streetName;
+        return "Address{" +
+                "streetName='" + streetName + '\'' +
+                '}';
     }
 }

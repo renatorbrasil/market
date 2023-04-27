@@ -26,13 +26,10 @@ public class NewOrderCommandProcessor {
         try {
             User user =  userRepository.findById(command.getUserId());
 
-            var products = productRepository.findByIdSet(
-                    command.getProductIds());
+            var products = productRepository.findByIdSet
+                    (command.getProductIds());
 
-            var productSnapshots = products.stream()
-                    .map(Product::getSnapshot).toList();
-
-            Order order = new Order(productSnapshots, user.getSnapshot());
+            Order order = new Order(products, user);
 
             orderRepository.save(order);
 

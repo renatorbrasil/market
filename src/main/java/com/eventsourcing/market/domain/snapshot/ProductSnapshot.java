@@ -28,4 +28,14 @@ public class ProductSnapshot extends Snapshot {
         this.onStock = onStock;
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "ProductSnapshot{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", onStock=" + onStock +
+                ", price=" + price +
+                '}';
+    }
 }

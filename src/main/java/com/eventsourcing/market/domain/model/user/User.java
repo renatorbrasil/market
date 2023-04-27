@@ -55,4 +55,13 @@ public class User extends EventSourcedAggregate {
     private void when(UserCreatedEvent event) {
         address = event.getAddress();
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", version=" + version +
+                ", address=" + address +
+                '}';
+    }
 }
