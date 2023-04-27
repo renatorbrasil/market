@@ -39,10 +39,10 @@ public class User extends EventSourcedAggregate {
 
     @Override
     protected void applyEvent(DomainEvent change) {
-        if (change instanceof UserChangeAddressEvent) {
-            when((UserChangeAddressEvent) change);
-        } else if (change instanceof UserCreatedEvent) {
+        if (change instanceof UserCreatedEvent) {
             when((UserCreatedEvent) change);
+        } else if (change instanceof UserChangeAddressEvent) {
+            when((UserChangeAddressEvent) change);
         } else {
             throw new EventNotSupportedException();
         }

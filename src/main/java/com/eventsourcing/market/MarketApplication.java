@@ -48,11 +48,6 @@ public class MarketApplication {
 			productRepository.save(product1);
 			productRepository.save(product2);
 
-			System.out.println("Product 1: " + product1.getId());
-			System.out.println("Product 2: " + product2.getId());
-
-			System.out.println("User: " + user.getId());
-
 			var productList = List.of(product1.getId(), product2.getId());
 
 			var newOrderCommand = new NewOrderCommand(productList, user.getId());
@@ -60,17 +55,13 @@ public class MarketApplication {
 
 			var order = orderRepository.findById(orderId);
 
-			System.out.println(order);
-
 			order.cancel();
 
 			orderRepository.save(order);
 
-			var order2 = orderRepository.findById(orderId);
+			user.changeAddress(new Address("Rua Afonso Pena"));
 
-			System.out.println(order2);
-
-			System.out.println(order2.getTotalPrice());
+			userRepository.save(user);
 
 		} catch (ApplicationException e) {
 			e.printStackTrace();

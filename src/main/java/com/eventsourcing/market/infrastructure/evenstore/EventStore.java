@@ -26,7 +26,6 @@ public class EventStore {
     final SnapshotMongoRepository snapshotRepository;
 
     public void storeEventList(List<DomainEvent> events, EventSourcedAggregate aggregate) {
-        var latestEvent = domainEventRepository.findLatestByAggregateId(aggregate.getId());
 
         if (events.isEmpty()) return;
 
@@ -38,7 +37,9 @@ public class EventStore {
         var earliestUncommittedEvent = events.stream()
                 .mapToInt(DomainEvent::getEventNumber)
                 .min()
-                .getAsInt();
+                .orElse(0);
+
+        var latestEvent = domainEventRepository.findLatestByAggregateId(aggregate.getId());
 
         if (latestEvent.isPresent() &&
                 latestEvent.get().getEventNumber() >= earliestUncommittedEvent) {
