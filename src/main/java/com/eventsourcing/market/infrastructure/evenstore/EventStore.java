@@ -30,7 +30,7 @@ public class EventStore {
         if (events.isEmpty()) return;
 
         if (events.stream()
-                .anyMatch(event -> event.getId() == null)) {
+                .anyMatch(event -> event.getId() == null || event.getEventNumber() == null)) {
             throw new InvalidRegisterException();
         }
 
