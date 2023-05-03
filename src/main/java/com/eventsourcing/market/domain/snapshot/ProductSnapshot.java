@@ -11,21 +11,21 @@ import java.util.UUID;
 public class ProductSnapshot extends Snapshot {
     private final String name;
     private final String description;
-    private final boolean onStock;
+    private final boolean inStock;
     private final Money price;
 
     public ProductSnapshot(
             UUID aggregateId,
             String name,
             String description,
-            boolean onStock,
+            boolean inStock,
             Money price,
             Integer eventNumber
     ) {
         super(aggregateId, eventNumber);
         this.name = name;
         this.description = description;
-        this.onStock = onStock;
+        this.inStock = inStock;
         this.price = price;
     }
 
@@ -34,7 +34,7 @@ public class ProductSnapshot extends Snapshot {
         return "ProductSnapshot{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", onStock=" + onStock +
+                ", onStock=" + inStock +
                 ", price=" + price +
                 '}';
     }

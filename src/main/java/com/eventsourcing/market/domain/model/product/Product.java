@@ -15,7 +15,7 @@ public class Product extends EventSourcedAggregate {
     private String name;
     private String description;
     private Money price;
-    private boolean onStock;
+    private boolean inStock;
 
     public Product(String name, String description, Money price) {
         super();
@@ -31,7 +31,7 @@ public class Product extends EventSourcedAggregate {
         this.name = snapshot.getName();
         this.description = snapshot.getDescription();
         this.price = snapshot.getPrice();
-        this.onStock = snapshot.isOnStock();
+        this.inStock = snapshot.isInStock();
     }
 
     @Override
@@ -49,15 +49,15 @@ public class Product extends EventSourcedAggregate {
         this.description = event.getDescription();
         this.name = event.getName();
         this.price = event.getPrice();
-        this.onStock = true;
+        this.inStock = true;
     }
 
     private void when(ProductOutOfStockEvent event) {
-        this.onStock = false;
+        this.inStock = false;
     }
 
-    public boolean isOnStock() {
-        return onStock;
+    public boolean isInStock() {
+        return inStock;
     }
 
     public void setOutOfStock() {
@@ -65,7 +65,7 @@ public class Product extends EventSourcedAggregate {
     }
 
     public ProductSnapshot getSnapshot() {
-        return new ProductSnapshot(id, name, description, onStock, price, version);
+        return new ProductSnapshot(id, name, description, inStock, price, version);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class Product extends EventSourcedAggregate {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", onStock=" + onStock +
+                ", onStock=" + inStock +
                 '}';
     }
 }

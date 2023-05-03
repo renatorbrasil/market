@@ -63,6 +63,8 @@ public class MarketApplication {
 
 			userRepository.save(user);
 
+			System.out.println(order.getId());
+
 		} catch (ApplicationException e) {
 			e.printStackTrace();
 		}

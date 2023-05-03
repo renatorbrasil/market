@@ -71,7 +71,7 @@ public class Order extends EventSourcedAggregate {
 
     private void when(OrderCreatedEvent event) {
         event.getProducts().forEach(product -> {
-            if (!product.isOnStock()) {
+            if (!product.isInStock()) {
                 throw new ProductIsNotAvailableException(product.getId());
             }
         });
